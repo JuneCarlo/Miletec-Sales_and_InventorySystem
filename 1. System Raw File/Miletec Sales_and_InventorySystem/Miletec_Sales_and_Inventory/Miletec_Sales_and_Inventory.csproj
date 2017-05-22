@@ -1,0 +1,789 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{EED46B9C-FBC2-4FA9-A56A-0543CC84CB44}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Miletec_Sales_and_Inventory</RootNamespace>
+    <AssemblyName>Miletec_Sales_and_Inventory</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="FlashControlV71, Version=1.0.3187.32366, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CRDamages.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CRDamages.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CRStocksAvailable.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CRStocksAvailable.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CrystalReportSales.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CrystalReportSales.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CrystalReportST_Receipt.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CrystalReportST_Receipt.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CrystalReportST_Sales.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CrystalReportST_Sales.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CR_InstallationReceipt.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CR_InstallationReceipt.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CR_PurchaseReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CR_PurchaseReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CR_Receipt.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CR_Receipt.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CSDeliveredItems.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CSDeliveredItems.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Customer\frm_CustomerTransaction.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Customer\frm_CustomerTransaction.Designer.cs">
+      <DependentUpon>frm_CustomerTransaction.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Customer\frm_Customer_Delivery.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Customer\frm_Customer_Delivery.Designer.cs">
+      <DependentUpon>frm_Customer_Delivery.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Customer\frm_Customer_Details.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Customer\frm_Customer_Details.Designer.cs">
+      <DependentUpon>frm_Customer_Details.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomerDeliveryReplacement.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CustomerDeliveryReplacement.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="CustomerTransaction.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CustomerTransaction.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSourceViewStock.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSourceViewStock.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DS_Inventory.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DS_Inventory.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DS_Receipt.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DS_Receipt.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DS_Sales.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DS_Sales.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="frmSales_Report.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSales_Report.Designer.cs">
+      <DependentUpon>frmSales_Report.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frm_Installation_Receipt.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_Installation_Receipt.Designer.cs">
+      <DependentUpon>frm_Installation_Receipt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frm_Receipt.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_Receipt.Designer.cs">
+      <DependentUpon>frm_Receipt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MiletecDataSet3.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MiletecDataSet3.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Stocks\frmViewStockforStaffForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Stocks\frmViewStockforStaffForm.Designer.cs">
+      <DependentUpon>frmViewStockforStaffForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmViewUsers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmViewUsers.Designer.cs">
+      <DependentUpon>frmViewUsers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frm_DamagesAndReplacement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_DamagesAndReplacement.Designer.cs">
+      <DependentUpon>frm_DamagesAndReplacement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmViewCustomerTransaction.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmViewCustomerTransaction.Designer.cs">
+      <DependentUpon>frmViewCustomerTransaction.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frm_installation.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>frm_installation.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="frm_installation_customerService.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_installation_customerService.Designer.cs">
+      <DependentUpon>frm_installation_customerService.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frm_Inventory_Report.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_Inventory_Report.Designer.cs">
+      <DependentUpon>frm_Inventory_Report.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frm_view_order_from_supplier.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_view_order_from_supplier.Designer.cs">
+      <DependentUpon>frm_view_order_from_supplier.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MiletecDataSet10.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MiletecDataSet10.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="MiletecDataSet111.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MiletecDataSet111.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="MiletecDataSet12.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MiletecDataSet12.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="MiletecDataSet9.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MiletecDataSet9.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="OrderDetails.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OrderDetails.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="OrderFromSupplier.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OrderFromSupplier.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Supplier\frm_SupplierTransaction.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Supplier\frm_SupplierTransaction.Designer.cs">
+      <DependentUpon>frm_SupplierTransaction.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Customer\frm_View_Customer_Delivery.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Customer\frm_View_Customer_Delivery.Designer.cs">
+      <DependentUpon>frm_View_Customer_Delivery.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Supplier\frm_View_Delivery.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Supplier\frm_View_Delivery.Designer.cs">
+      <DependentUpon>frm_View_Delivery.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Stocks\frm_view_stocks.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Stocks\frm_view_stocks.Designer.cs">
+      <DependentUpon>frm_view_stocks.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Login_Module\frm_ChangePassword.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login_Module\frm_ChangePassword.Designer.cs">
+      <DependentUpon>frm_ChangePassword.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MiletecDataSet.cs">
+      <DependentUpon>MiletecDataSet.xsd</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="MiletecDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MiletecDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="MiletecDataSet1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MiletecDataSet1.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="MiletecDataSet2.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MiletecDataSet2.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="MiletecDataSet6.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MiletecDataSet6.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="MiletecDataSet7.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MiletecDataSet7.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="MiletecDataSet8.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MiletecDataSet8.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Supplier\frm_Delivery_Supplier.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Supplier\frm_Delivery_Supplier.Designer.cs">
+      <DependentUpon>frm_Delivery_Supplier.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Login_Module\frm_Forgot_Password.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login_Module\frm_Forgot_Password.Designer.cs">
+      <DependentUpon>frm_Forgot_Password.cs</DependentUpon>
+    </Compile>
+    <Compile Include="clsrepository.cs" />
+    <Compile Include="db_Miletec.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>db_Miletec.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="Login_Module\frm_Update_AdminInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login_Module\frm_Update_AdminInfo.Designer.cs">
+      <DependentUpon>frm_Update_AdminInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Login_Module\frm_Add_Employee.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login_Module\frm_Add_Employee.Designer.cs">
+      <DependentUpon>frm_Add_Employee.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Login_Module\Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login_Module\Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Main_Form\wndw_Main_Admin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main_Form\wndw_Main_Admin.Designer.cs">
+      <DependentUpon>wndw_Main_Admin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Main_Form\wndw_Main_Staff.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main_Form\wndw_Main_Staff.Designer.cs">
+      <DependentUpon>wndw_Main_Staff.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Supplier\Supplier_Details.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Supplier\Supplier_Details.Designer.cs">
+      <DependentUpon>Supplier_Details.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewCustomerTransaction.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ViewCustomerTransaction.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="ViewUsers.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ViewUsers.xsd</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="CRDamages.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CRDamages.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CRStocksAvailable.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CRStocksAvailable.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CrystalReportSales.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CrystalReportSales.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CrystalReportST_Receipt.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CrystalReportST_Receipt.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CrystalReportST_Sales.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CrystalReportST_Sales.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CR_InstallationReceipt.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CR_InstallationReceipt.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CR_PurchaseReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CR_PurchaseReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CR_Receipt.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CR_Receipt.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CSDeliveredItems.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CSDeliveredItems.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Customer\frm_CustomerTransaction.resx">
+      <DependentUpon>frm_CustomerTransaction.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Customer\frm_Customer_Delivery.resx">
+      <DependentUpon>frm_Customer_Delivery.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Customer\frm_Customer_Details.resx">
+      <DependentUpon>frm_Customer_Details.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSales_Report.resx">
+      <DependentUpon>frmSales_Report.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_Installation_Receipt.resx">
+      <DependentUpon>frm_Installation_Receipt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_Receipt.resx">
+      <DependentUpon>frm_Receipt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Stocks\frmViewStockforStaffForm.resx">
+      <DependentUpon>frmViewStockforStaffForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmViewUsers.resx">
+      <DependentUpon>frmViewUsers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_DamagesAndReplacement.resx">
+      <DependentUpon>frm_DamagesAndReplacement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmViewCustomerTransaction.resx">
+      <DependentUpon>frmViewCustomerTransaction.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_installation_customerService.resx">
+      <DependentUpon>frm_installation_customerService.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_Inventory_Report.resx">
+      <DependentUpon>frm_Inventory_Report.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_view_order_from_supplier.resx">
+      <DependentUpon>frm_view_order_from_supplier.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Supplier\frm_SupplierTransaction.resx">
+      <DependentUpon>frm_SupplierTransaction.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Customer\frm_View_Customer_Delivery.resx">
+      <DependentUpon>frm_View_Customer_Delivery.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Supplier\frm_View_Delivery.resx">
+      <DependentUpon>frm_View_Delivery.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Stocks\frm_view_stocks.resx">
+      <DependentUpon>frm_view_stocks.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Login_Module\frm_ChangePassword.resx">
+      <DependentUpon>frm_ChangePassword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Supplier\frm_Delivery_Supplier.resx">
+      <DependentUpon>frm_Delivery_Supplier.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Login_Module\frm_Forgot_Password.resx">
+      <DependentUpon>frm_Forgot_Password.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Login_Module\frm_Update_AdminInfo.resx">
+      <DependentUpon>frm_Update_AdminInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main_Form\wndw_Main_Admin.resx">
+      <DependentUpon>wndw_Main_Admin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main_Form\wndw_Main_Staff.resx">
+      <DependentUpon>wndw_Main_Staff.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Supplier\Supplier_Details.resx">
+      <DependentUpon>Supplier_Details.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="CustomerDeliveryReplacement.xsc">
+      <DependentUpon>CustomerDeliveryReplacement.xsd</DependentUpon>
+    </None>
+    <None Include="CustomerDeliveryReplacement.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>CustomerDeliveryReplacement.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="CustomerDeliveryReplacement.xss">
+      <DependentUpon>CustomerDeliveryReplacement.xsd</DependentUpon>
+    </None>
+    <None Include="CustomerTransaction.xsc">
+      <DependentUpon>CustomerTransaction.xsd</DependentUpon>
+    </None>
+    <None Include="CustomerTransaction.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>CustomerTransaction.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="CustomerTransaction.xss">
+      <DependentUpon>CustomerTransaction.xsd</DependentUpon>
+    </None>
+    <None Include="DataSourceViewStock.xsc">
+      <DependentUpon>DataSourceViewStock.xsd</DependentUpon>
+    </None>
+    <None Include="DataSourceViewStock.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSourceViewStock.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DataSourceViewStock.xss">
+      <DependentUpon>DataSourceViewStock.xsd</DependentUpon>
+    </None>
+    <None Include="db_Miletec.dbml.layout">
+      <DependentUpon>db_Miletec.dbml</DependentUpon>
+    </None>
+    <EmbeddedResource Include="Login_Module\frm_Add_Employee.resx">
+      <DependentUpon>frm_Add_Employee.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Login_Module\Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="db_Miletec.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>db_Miletec.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DS_Inventory.xsc">
+      <DependentUpon>DS_Inventory.xsd</DependentUpon>
+    </None>
+    <None Include="DS_Inventory.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DS_Inventory.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DS_Inventory.xss">
+      <DependentUpon>DS_Inventory.xsd</DependentUpon>
+    </None>
+    <None Include="DS_Receipt.xsc">
+      <DependentUpon>DS_Receipt.xsd</DependentUpon>
+    </None>
+    <None Include="DS_Receipt.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DS_Receipt.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DS_Receipt.xss">
+      <DependentUpon>DS_Receipt.xsd</DependentUpon>
+    </None>
+    <None Include="DS_Sales.xsc">
+      <DependentUpon>DS_Sales.xsd</DependentUpon>
+    </None>
+    <None Include="DS_Sales.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DS_Sales.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DS_Sales.xss">
+      <DependentUpon>DS_Sales.xsd</DependentUpon>
+    </None>
+    <None Include="frm_installation.xsc">
+      <DependentUpon>frm_installation.xsd</DependentUpon>
+    </None>
+    <None Include="frm_installation.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>frm_installation.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="frm_installation.xss">
+      <DependentUpon>frm_installation.xsd</DependentUpon>
+    </None>
+    <None Include="MiletecDataSet.xsc">
+      <DependentUpon>MiletecDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="MiletecDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>MiletecDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="MiletecDataSet.xss">
+      <DependentUpon>MiletecDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="MiletecDataSet1.xsc">
+      <DependentUpon>MiletecDataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="MiletecDataSet1.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>MiletecDataSet1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="MiletecDataSet1.xss">
+      <DependentUpon>MiletecDataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="MiletecDataSet10.xsc">
+      <DependentUpon>MiletecDataSet10.xsd</DependentUpon>
+    </None>
+    <None Include="MiletecDataSet10.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>MiletecDataSet10.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="MiletecDataSet10.xss">
+      <DependentUpon>MiletecDataSet10.xsd</DependentUpon>
+    </None>
+    <None Include="MiletecDataSet111.xsc">
+      <DependentUpon>MiletecDataSet111.xsd</DependentUpon>
+    </None>
+    <None Include="MiletecDataSet111.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>MiletecDataSet111.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="MiletecDataSet111.xss">
+      <DependentUpon>MiletecDataSet111.xsd</DependentUpon>
+    </None>
+    <None Include="MiletecDataSet12.xsc">
+      <DependentUpon>MiletecDataSet12.xsd</DependentUpon>
+    </None>
+    <None Include="MiletecDataSet12.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>MiletecDataSet12.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="MiletecDataSet12.xss">
+      <DependentUpon>MiletecDataSet12.xsd</DependentUpon>
+    </None>
+    <None Include="MiletecDataSet2.xsc">
+      <DependentUpon>MiletecDataSet2.xsd</DependentUpon>
+    </None>
+    <None Include="MiletecDataSet2.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>MiletecDataSet2.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="MiletecDataSet2.xss">
+      <DependentUpon>MiletecDataSet2.xsd</DependentUpon>
+    </None>
+    <None Include="MiletecDataSet3.xsc">
+      <DependentUpon>MiletecDataSet3.xsd</DependentUpon>
+    </None>
+    <None Include="MiletecDataSet3.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>MiletecDataSet3.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="MiletecDataSet3.xss">
+      <DependentUpon>MiletecDataSet3.xsd</DependentUpon>
+    </None>
+    <None Include="MiletecDataSet6.xsc">
+      <DependentUpon>MiletecDataSet6.xsd</DependentUpon>
+    </None>
+    <None Include="MiletecDataSet6.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>MiletecDataSet6.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="MiletecDataSet6.xss">
+      <DependentUpon>MiletecDataSet6.xsd</DependentUpon>
+    </None>
+    <None Include="MiletecDataSet7.xsc">
+      <DependentUpon>MiletecDataSet7.xsd</DependentUpon>
+    </None>
+    <None Include="MiletecDataSet7.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>MiletecDataSet7.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="MiletecDataSet7.xss">
+      <DependentUpon>MiletecDataSet7.xsd</DependentUpon>
+    </None>
+    <None Include="MiletecDataSet8.xsc">
+      <DependentUpon>MiletecDataSet8.xsd</DependentUpon>
+    </None>
+    <None Include="MiletecDataSet8.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>MiletecDataSet8.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="MiletecDataSet8.xss">
+      <DependentUpon>MiletecDataSet8.xsd</DependentUpon>
+    </None>
+    <None Include="MiletecDataSet9.xsc">
+      <DependentUpon>MiletecDataSet9.xsd</DependentUpon>
+    </None>
+    <None Include="MiletecDataSet9.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>MiletecDataSet9.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="MiletecDataSet9.xss">
+      <DependentUpon>MiletecDataSet9.xsd</DependentUpon>
+    </None>
+    <None Include="OrderDetails.xsc">
+      <DependentUpon>OrderDetails.xsd</DependentUpon>
+    </None>
+    <None Include="OrderDetails.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>OrderDetails.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="OrderDetails.xss">
+      <DependentUpon>OrderDetails.xsd</DependentUpon>
+    </None>
+    <None Include="OrderFromSupplier.xsc">
+      <DependentUpon>OrderFromSupplier.xsd</DependentUpon>
+    </None>
+    <None Include="OrderFromSupplier.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>OrderFromSupplier.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="OrderFromSupplier.xss">
+      <DependentUpon>OrderFromSupplier.xsd</DependentUpon>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <None Include="ViewCustomerTransaction.xsc">
+      <DependentUpon>ViewCustomerTransaction.xsd</DependentUpon>
+    </None>
+    <None Include="ViewCustomerTransaction.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ViewCustomerTransaction.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ViewCustomerTransaction.xss">
+      <DependentUpon>ViewCustomerTransaction.xsd</DependentUpon>
+    </None>
+    <None Include="ViewUsers.xsc">
+      <DependentUpon>ViewUsers.xsd</DependentUpon>
+    </None>
+    <None Include="ViewUsers.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ViewUsers.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ViewUsers.xss">
+      <DependentUpon>ViewUsers.xsd</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

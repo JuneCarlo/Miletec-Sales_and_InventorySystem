@@ -1,0 +1,1014 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Miletec" Class="db_MiletecDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=.\sqlexpress;Initial Catalog=Miletec;Integrated Security=True" SettingsObjectName="Miletec_Sales_and_Inventory.Properties.Settings" SettingsPropertyName="MiletecConnectionString2" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.tblCustomerDelivery" Member="tblCustomerDeliveries">
+    <Type Name="tblCustomerDelivery">
+      <Column Name="DeliveryID" Type="System.String" DbType="VarChar(30) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="transactionid" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="preparedby" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="TimetoDeliver" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Association Name="tblCustomerDelivery_tblCustomerDeliveryDetail" Member="tblCustomerDeliveryDetails" ThisKey="DeliveryID" OtherKey="DeliveryNo" Type="tblCustomerDeliveryDetail" />
+      <Association Name="tblCustomerDelivery_tblDamagesAndReplacement" Member="tblDamagesAndReplacements" ThisKey="DeliveryID" OtherKey="DeliveryNo" Type="tblDamagesAndReplacement" />
+      <Association Name="tblUser_tblCustomerDelivery" Member="tblUser" ThisKey="preparedby" OtherKey="UserID" Type="tblUser" IsForeignKey="true" />
+      <Association Name="tblcustomertransaction_tblCustomerDelivery" Member="tblcustomertransaction" ThisKey="transactionid" OtherKey="transactionid" Type="tblcustomertransaction" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tblUser" Member="tblUsers">
+    <Type Name="tblUser">
+      <Column Name="UserID" Type="System.String" DbType="VarChar(30) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="LastName" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="FirstName" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="MiddleName" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Username" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="Password" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="isactive" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="secret_question" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="secret_answer" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Status" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Association Name="tblUser_tblCustomerDelivery" Member="tblCustomerDeliveries" ThisKey="UserID" OtherKey="preparedby" Type="tblCustomerDelivery" />
+      <Association Name="tblUser_tblcustomerdetail" Member="tblcustomerdetails" ThisKey="UserID" OtherKey="UserID" Type="tblcustomerdetail" />
+      <Association Name="tblUser_tblDelivery_Supplier" Member="tblDelivery_Suppliers" ThisKey="UserID" OtherKey="PreparedAndReceivedBy" Type="tblDelivery_Supplier" />
+      <Association Name="tblUser_tblOrder" Member="tblOrders" ThisKey="UserID" OtherKey="OrderBy" Type="tblOrder" />
+      <Association Name="tblUser_tblSupplierDetail" Member="tblSupplierDetails" ThisKey="UserID" OtherKey="AdminID" Type="tblSupplierDetail" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tblCustomerDeliveryDetails" Member="tblCustomerDeliveryDetails">
+    <Type Name="tblCustomerDeliveryDetail">
+      <Column Name="DeliveryNo" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="TransactionID" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="ProdID" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="ProductName" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Quantity" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TimeToDeliver" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Association Name="tblCustomerDelivery_tblCustomerDeliveryDetail" Member="tblCustomerDelivery" ThisKey="DeliveryNo" OtherKey="DeliveryID" Type="tblCustomerDelivery" IsForeignKey="true" />
+      <Association Name="tblcustomertransaction_tblCustomerDeliveryDetail" Member="tblcustomertransaction" ThisKey="TransactionID" OtherKey="transactionid" Type="tblcustomertransaction" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tblcustomerdetails" Member="tblcustomerdetails">
+    <Type Name="tblcustomerdetail">
+      <Column Name="UserID" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="CustomerID" Type="System.String" DbType="VarChar(30) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="CustomerName" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="Address" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="Contactnumber1" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="Contactnumber2" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Association Name="tblcustomerdetail_tblcustomertransaction" Member="tblcustomertransactions" ThisKey="CustomerID" OtherKey="customerid" Type="tblcustomertransaction" />
+      <Association Name="tblcustomerdetail_tblinstallation" Member="tblinstallations" ThisKey="CustomerID" OtherKey="customerid" Type="tblinstallation" />
+      <Association Name="tblUser_tblcustomerdetail" Member="tblUser" ThisKey="UserID" OtherKey="UserID" Type="tblUser" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tblcustomertrans_details" Member="tblcustomertrans_details">
+    <Type Name="tblcustomertrans_detail">
+      <Column Name="transactionid" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="productid" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="productname" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="qty" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="unitprice" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="size" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Status" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="dateOrder" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Subtotal" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="customerType" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Association Name="tblcustomertransaction_tblcustomertrans_detail" Member="tblcustomertransaction" ThisKey="transactionid" OtherKey="transactionid" Type="tblcustomertransaction" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tblcustomertransaction" Member="tblcustomertransactions">
+    <Type Name="tblcustomertransaction">
+      <Column Name="transactionid" Type="System.String" DbType="VarChar(30) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dateOrder" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="time" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="customerid" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="CustomerName" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="address" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="TotalInstallationPayment" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Gtotal" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Cashrendered" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="unitprice" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="change" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="services" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="status" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Association Name="tblcustomertransaction_tblCustomerDelivery" Member="tblCustomerDeliveries" ThisKey="transactionid" OtherKey="transactionid" Type="tblCustomerDelivery" />
+      <Association Name="tblcustomertransaction_tblCustomerDeliveryDetail" Member="tblCustomerDeliveryDetails" ThisKey="transactionid" OtherKey="TransactionID" Type="tblCustomerDeliveryDetail" />
+      <Association Name="tblcustomertransaction_tblcustomertrans_detail" Member="tblcustomertrans_details" ThisKey="transactionid" OtherKey="transactionid" Type="tblcustomertrans_detail" />
+      <Association Name="tblcustomertransaction_tblDamagesAndReplacement" Member="tblDamagesAndReplacements" ThisKey="transactionid" OtherKey="TransactionNo" Type="tblDamagesAndReplacement" />
+      <Association Name="tblcustomertransaction_tblinstallation" Member="tblinstallations" ThisKey="transactionid" OtherKey="Transactionid" Type="tblinstallation" />
+      <Association Name="tblcustomerdetail_tblcustomertransaction" Member="tblcustomerdetail" ThisKey="customerid" OtherKey="CustomerID" Type="tblcustomerdetail" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tblDamagesAndReplacements" Member="tblDamagesAndReplacements">
+    <Type Name="tblDamagesAndReplacement">
+      <Column Name="ReplacementNo" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="TransactionNo" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="DeliveryNo" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="ProductID" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="ProductName" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="DateDamaged" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="QtyOfDamages" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="tblCustomerDelivery_tblDamagesAndReplacement" Member="tblCustomerDelivery" ThisKey="DeliveryNo" OtherKey="DeliveryID" Type="tblCustomerDelivery" IsForeignKey="true" />
+      <Association Name="tblcustomertransaction_tblDamagesAndReplacement" Member="tblcustomertransaction" ThisKey="TransactionNo" OtherKey="transactionid" Type="tblcustomertransaction" IsForeignKey="true" />
+      <Association Name="tblStock_tblDamagesAndReplacement" Member="tblStock" ThisKey="ProductID" OtherKey="productid" Type="tblStock" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tblDelivery_Supplier" Member="tblDelivery_Suppliers">
+    <Type Name="tblDelivery_Supplier">
+      <Column Name="DeliveryNo" Type="System.String" DbType="VarChar(30) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="OrderID" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="PreparedAndReceivedBy" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="DeliveredBy" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Association Name="tblDelivery_Supplier_tblDeliveryDetail" Member="tblDeliveryDetails" ThisKey="DeliveryNo" OtherKey="DeliveryNo" Type="tblDeliveryDetail" />
+      <Association Name="tblUser_tblDelivery_Supplier" Member="tblUser" ThisKey="PreparedAndReceivedBy" OtherKey="UserID" Type="tblUser" IsForeignKey="true" />
+      <Association Name="tblOrder_tblDelivery_Supplier" Member="tblOrder" ThisKey="OrderID" OtherKey="OrderID" Type="tblOrder" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tblDeliveryDetails" Member="tblDeliveryDetails">
+    <Type Name="tblDeliveryDetail">
+      <Column Name="DeliveryNo" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="OrderID" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="ProdID" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="DeliveryDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ProductName" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Quantity" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="tblDelivery_Supplier_tblDeliveryDetail" Member="tblDelivery_Supplier" ThisKey="DeliveryNo" OtherKey="DeliveryNo" Type="tblDelivery_Supplier" IsForeignKey="true" />
+      <Association Name="tblOrder_tblDeliveryDetail" Member="tblOrder" ThisKey="OrderID" OtherKey="OrderID" Type="tblOrder" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tblinstallation" Member="tblinstallations">
+    <Type Name="tblinstallation">
+      <Column Name="customerid" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Transactionid" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="productid" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="CustomerName" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="InstallationName" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="InstallationPayment" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Association Name="tblcustomerdetail_tblinstallation" Member="tblcustomerdetail" ThisKey="customerid" OtherKey="CustomerID" Type="tblcustomerdetail" IsForeignKey="true" />
+      <Association Name="tblcustomertransaction_tblinstallation" Member="tblcustomertransaction" ThisKey="Transactionid" OtherKey="transactionid" Type="tblcustomertransaction" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tblOrderDetails" Member="tblOrderDetails">
+    <Type Name="tblOrderDetail">
+      <Column Name="OrderID" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="ProdID" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="ProductName" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Quantity" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Status" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Association Name="tblOrder_tblOrderDetail" Member="tblOrder" ThisKey="OrderID" OtherKey="OrderID" Type="tblOrder" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tblOrders" Member="tblOrders">
+    <Type Name="tblOrder">
+      <Column Name="OrderID" Type="System.String" DbType="VarChar(30) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="SupplierID" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="OrderDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="OrderBy" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Status" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Association Name="tblOrder_tblDelivery_Supplier" Member="tblDelivery_Suppliers" ThisKey="OrderID" OtherKey="OrderID" Type="tblDelivery_Supplier" />
+      <Association Name="tblOrder_tblDeliveryDetail" Member="tblDeliveryDetails" ThisKey="OrderID" OtherKey="OrderID" Type="tblDeliveryDetail" />
+      <Association Name="tblOrder_tblOrderDetail" Member="tblOrderDetails" ThisKey="OrderID" OtherKey="OrderID" Type="tblOrderDetail" />
+      <Association Name="tblUser_tblOrder" Member="tblUser" ThisKey="OrderBy" OtherKey="UserID" Type="tblUser" IsForeignKey="true" />
+      <Association Name="tblSupplierDetail_tblOrder" Member="tblSupplierDetail" ThisKey="SupplierID" OtherKey="SupplierID" Type="tblSupplierDetail" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tblProducts" Member="tblProducts">
+    <Type Name="tblProduct">
+      <Column Name="SupplierID" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="ProductID" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="ProductName" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="AvailQty" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="tblSupplierDetail_tblProduct" Member="tblSupplierDetail" ThisKey="SupplierID" OtherKey="SupplierID" Type="tblSupplierDetail" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tblStocks" Member="tblStocks">
+    <Type Name="tblStock">
+      <Column Name="productid" Type="System.String" DbType="VarChar(30) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="productname" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="availqty" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="price" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Size" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Damages" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Replacement" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="tblStock_tblDamagesAndReplacement" Member="tblDamagesAndReplacements" ThisKey="productid" OtherKey="ProductID" Type="tblDamagesAndReplacement" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tblSupplierDetails" Member="tblSupplierDetails">
+    <Type Name="tblSupplierDetail">
+      <Column Name="AdminID" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="SupplierID" Type="System.String" DbType="VarChar(30) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="SupplierName" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Address" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="ContactNumber1" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ContactNumber2" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ContactPerson" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Association Name="tblSupplierDetail_tblOrder" Member="tblOrders" ThisKey="SupplierID" OtherKey="SupplierID" Type="tblOrder" />
+      <Association Name="tblSupplierDetail_tblProduct" Member="tblProducts" ThisKey="SupplierID" OtherKey="SupplierID" Type="tblProduct" />
+      <Association Name="tblUser_tblSupplierDetail" Member="tblUser" ThisKey="AdminID" OtherKey="UserID" Type="tblUser" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Function Name="dbo.get_TransactionID" Method="get_TransactionID">
+    <Parameter Name="transactionid" Type="System.String" DbType="VarChar(30)" />
+    <ElementType Name="get_TransactionIDResult">
+      <Column Name="transactionid" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_ViewSupplierDetails" Method="sp_ViewSupplierDetails">
+    <ElementType Name="sp_ViewSupplierDetailsResult">
+      <Column Name="AdminID" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="SupplierID" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="SupplierName" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Address" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="ContactNumber1" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ContactNumber2" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ContactPerson" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_changepass" Method="sp_changepass">
+    <Parameter Name="Username" Parameter="username" Type="System.String" DbType="NVarChar(30)" />
+    <Parameter Name="newpassword" Type="System.String" DbType="NVarChar(MAX)" />
+    <Parameter Name="oldpassword" Type="System.String" DbType="NVarChar(MAX)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_customerDelivery" Method="sp_customerDelivery">
+    <Parameter Name="DeliveryID" Parameter="deliveryID" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="transactionid" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="date" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="preparedby" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="TimetoDeliver" Parameter="timetoDeliver" Type="System.String" DbType="VarChar(30)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_CustomerDeliveryDetails" Method="sp_CustomerDeliveryDetails">
+    <Parameter Name="DeliveryNo" Parameter="deliveryNo" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="TransactionID" Parameter="transactionID" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="ProdID" Parameter="prodID" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="ProductName" Parameter="productName" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="Quantity" Parameter="quantity" Type="System.Int32" DbType="Int" />
+    <Parameter Name="TimeToDeliver" Parameter="timeToDeliver" Type="System.String" DbType="VarChar(30)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_delete_CustomerDelivery" Method="sp_delete_CustomerDelivery">
+    <Parameter Name="DeliveryNo" Parameter="deliveryNo" Type="System.String" DbType="VarChar(30)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_delete_DeliverySupplier" Method="sp_delete_DeliverySupplier">
+    <Parameter Name="DeliveryNo" Parameter="deliveryNo" Type="System.String" DbType="VarChar(30)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_delete_Order" Method="sp_delete_Order">
+    <Parameter Name="OrderID" Parameter="orderID" Type="System.String" DbType="VarChar(30)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_delete_transaction" Method="sp_delete_transaction">
+    <Parameter Name="transactionid" Type="System.String" DbType="VarChar(30)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_deleteCustomerdetails" Method="sp_deleteCustomerdetails">
+    <Parameter Name="CustomerID" Parameter="customerID" Type="System.String" DbType="VarChar(30)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_DeleteOrderDetails" Method="sp_DeleteOrderDetails">
+    <Parameter Name="OrderID" Parameter="orderID" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="ProductID" Parameter="productID" Type="System.String" DbType="VarChar(30)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_DeliveryDetails" Method="sp_DeliveryDetails">
+    <Parameter Name="DeliveryNo" Parameter="deliveryNo" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="OrderID" Parameter="orderID" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="ProdID" Parameter="prodID" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="DeliveryDate" Parameter="deliveryDate" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="ProductName" Parameter="productName" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="Quantity" Parameter="quantity" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_DeliverySupplier" Method="sp_DeliverySupplier">
+    <Parameter Name="DeliveryNo" Parameter="deliveryNo" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="OrderID" Parameter="orderID" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="Date" Parameter="date" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="PreparedAndReceivedBy" Parameter="preparedAndReceivedBy" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="DeliveredBy" Parameter="deliveredBy" Type="System.String" DbType="VarChar(30)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_display_customerDetails" Method="sp_display_customerDetails">
+    <Parameter Name="TransactionId" Parameter="transactionId" Type="System.String" DbType="VarChar(30)" />
+    <ElementType Name="sp_display_customerDetailsResult">
+      <Column Name="productid" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="qty" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="size" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_display_stock" Method="sp_display_stock">
+    <Parameter Name="productid" Type="System.String" DbType="VarChar(30)" />
+    <ElementType Name="sp_display_stockResult">
+      <Column Name="price" Type="System.Double" DbType="Float" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_displayCusdetails" Method="sp_displayCusdetails">
+    <ElementType Name="sp_displayCusdetailsResult">
+      <Column Name="transactionid" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="customerid" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="CustomerName" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_displaycustranID" Method="sp_displaycustranID">
+    <ElementType Name="sp_displaycustranIDResult">
+      <Column Name="count" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_fill_productID" Method="sp_fill_productID">
+    <ElementType Name="sp_fill_productIDResult">
+      <Column Name="productid" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_genCustomerID" Method="sp_genCustomerID">
+    <ElementType Name="sp_genCustomerIDResult">
+      <Column Name="count" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_generate_DandR_ID" Method="sp_generate_DandR_ID">
+    <ElementType Name="sp_generate_DandR_IDResult">
+      <Column Name="count" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_generate_ProductID" Method="sp_generate_ProductID">
+    <ElementType Name="sp_generate_ProductIDResult">
+      <Column Name="count" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_generateInstallationID" Method="sp_generateInstallationID">
+    <ElementType Name="sp_generateInstallationIDResult">
+      <Column Name="count" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_get_ProductPrice" Method="sp_get_ProductPrice">
+    <Parameter Name="ProductID" Parameter="productID" Type="System.String" DbType="VarChar(30)" />
+    <ElementType Name="sp_get_ProductPriceResult">
+      <Column Name="price" Type="System.Double" DbType="Float" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_Get_User_ID" Method="sp_Get_User_ID">
+    <ElementType Name="sp_Get_User_IDResult">
+      <Column Name="Count" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_getcustdeliveryID" Method="sp_getcustdeliveryID">
+    <ElementType Name="sp_getcustdeliveryIDResult">
+      <Column Name="count" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_getcustomerid" Method="sp_getcustomerid">
+    <ElementType Name="sp_getcustomeridResult">
+      <Column Name="count" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_GetDeliveryID" Method="sp_GetDeliveryID">
+    <ElementType Name="sp_GetDeliveryIDResult">
+      <Column Name="Count" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_GetOrderID" Method="sp_GetOrderID">
+    <ElementType Name="sp_GetOrderIDResult">
+      <Column Name="Count" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_GetSupplierDetails" Method="sp_GetSupplierDetails">
+    <ElementType Name="sp_GetSupplierDetailsResult">
+      <Column Name="Count" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_insert_customerdetails" Method="sp_insert_customerdetails">
+    <Parameter Name="UserID" Parameter="userID" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="CustomerID" Parameter="customerID" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="CustomerName" Parameter="customerName" Type="System.String" DbType="NVarChar(30)" />
+    <Parameter Name="Address" Parameter="address" Type="System.String" DbType="NVarChar(30)" />
+    <Parameter Name="Contactnumber1" Parameter="contactnumber1" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="Contactnumber2" Parameter="contactnumber2" Type="System.String" DbType="VarChar(20)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_insert_DamagesAndReplacement" Method="sp_insert_DamagesAndReplacement">
+    <Parameter Name="ReplacementNo" Parameter="replacementNo" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="TransactionNo" Parameter="transactionNo" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="DeliveryNo" Parameter="deliveryNo" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="ProductID" Parameter="productID" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="ProductName" Parameter="productName" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="DateDamaged" Parameter="dateDamaged" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="QtyOfDamages" Parameter="qtyOfDamages" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_insert_productInStocks" Method="sp_insert_productInStocks">
+    <Parameter Name="productid" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="productname" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="availqty" Type="System.Int32" DbType="Int" />
+    <Parameter Name="price" Type="System.Double" DbType="Float" />
+    <Parameter Name="Size" Parameter="size" Type="System.Double" DbType="Float" />
+    <Parameter Name="Damages" Parameter="damages" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Replacement" Parameter="replacement" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_insert_User" Method="sp_insert_User">
+    <Parameter Name="UserID" Parameter="userID" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="LastName" Parameter="lastName" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="FirstName" Parameter="firstName" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="MiddleName" Parameter="middleName" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="Username" Parameter="username" Type="System.String" DbType="NVarChar(30)" />
+    <Parameter Name="Password" Parameter="password" Type="System.String" DbType="NVarChar(MAX)" />
+    <Parameter Name="isactive" Type="System.String" DbType="NVarChar(MAX)" />
+    <Parameter Name="secret_question" Type="System.String" DbType="NVarChar(MAX)" />
+    <Parameter Name="secret_answer" Type="System.String" DbType="NVarChar(MAX)" />
+    <Parameter Name="Status" Parameter="status" Type="System.String" DbType="VarChar(30)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_insertCustomerTrans" Method="sp_insertCustomerTrans">
+    <Parameter Name="transactionid" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="date" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="customerid" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="CustomerName" Parameter="customerName" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="address" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="TotalInstaPayment" Parameter="totalInstaPayment" Type="System.Double" DbType="Float" />
+    <Parameter Name="Gtotal" Parameter="gtotal" Type="System.Double" DbType="Float" />
+    <Parameter Name="Cashrendered" Parameter="cashrendered" Type="System.Double" DbType="Float" />
+    <Parameter Name="unitprice" Type="System.Double" DbType="Float" />
+    <Parameter Name="change" Type="System.Double" DbType="Float" />
+    <Parameter Name="services" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="status" Type="System.String" DbType="VarChar(30)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_insertcustomertrans_Details" Method="sp_insertcustomertrans_Details">
+    <Parameter Name="transactionid" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="productid" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="productname" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="qty" Type="System.Int32" DbType="Int" />
+    <Parameter Name="unitprice" Type="System.Double" DbType="Float" />
+    <Parameter Name="size" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="Status" Parameter="status" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="dateOrder" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="Subtotal" Parameter="subtotal" Type="System.Double" DbType="Float" />
+    <Parameter Name="customerType" Type="System.String" DbType="VarChar(30)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_insertInstallation" Method="sp_insertInstallation">
+    <Parameter Name="customerid" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="Transactionid" Parameter="transactionid" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="productid" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="CustomerName" Parameter="customerName" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="InsatallationName" Parameter="insatallationName" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="date" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="InstallationPayment" Parameter="installationPayment" Type="System.Double" DbType="Float" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_InventoryReport" Method="sp_InventoryReport">
+    <Parameter Name="FromDate" Parameter="fromDate" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="ToDate" Parameter="toDate" Type="System.DateTime" DbType="DateTime" />
+    <ElementType Name="sp_InventoryReportResult">
+      <Column Name="productid" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="productname" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="availqty" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="QtyOfDamages" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Quantity" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Quantity1" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="date1" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_Order" Method="sp_Order">
+    <Parameter Name="OrderID" Parameter="orderID" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="SupplierID" Parameter="supplierID" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="OrderDate" Parameter="orderDate" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="OrderBy" Parameter="orderBy" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="Status" Parameter="status" Type="System.String" DbType="VarChar(50)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_OrderDetails" Method="sp_OrderDetails">
+    <Parameter Name="OrderID" Parameter="orderID" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="ProdID" Parameter="prodID" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="ProductName" Parameter="productName" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="Quantity" Parameter="quantity" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Status" Parameter="status" Type="System.String" DbType="VarChar(50)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_Products" Method="sp_Products">
+    <Parameter Name="SupplierID" Parameter="supplierID" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="ProductID" Parameter="productID" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="ProductName" Parameter="productName" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="AvailQty" Parameter="availQty" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_removeTrans_details" Method="sp_removeTrans_details">
+    <Parameter Name="transactionid" Type="System.String" DbType="VarChar(30)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_resetUserPass" Method="sp_resetUserPass">
+    <Parameter Name="Username" Parameter="username" Type="System.String" DbType="VarChar(30)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_retreive_User_Password" Method="sp_retreive_User_Password">
+    <Parameter Name="Username" Parameter="username" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="secret_question" Type="System.String" DbType="NVarChar(MAX)" />
+    <Parameter Name="secret_answer" Type="System.String" DbType="NVarChar(MAX)" />
+    <ElementType Name="sp_retreive_User_PasswordResult">
+      <Column Name="UserID" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="LastName" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="FirstName" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="MiddleName" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Username" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="Password" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="isactive" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="secret_question" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="secret_answer" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Status" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_RetreiveOrderDetails" Method="sp_RetreiveOrderDetails">
+    <Parameter Name="ProductName" Parameter="productName" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="Quantity" Parameter="quantity" Type="System.Int32" DbType="Int" />
+    <ElementType Name="sp_RetreiveOrderDetailsResult">
+      <Column Name="ProductName" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Quantity" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_Retreivepass" Method="sp_Retreivepass">
+    <Parameter Name="Username" Parameter="username" Type="System.String" DbType="NVarChar(30)" />
+    <Parameter Name="secret_question" Type="System.String" DbType="NVarChar(MAX)" />
+    <Parameter Name="secret_answer" Type="System.String" DbType="NVarChar(MAX)" />
+    <ElementType Name="sp_RetreivepassResult">
+      <Column Name="UserID" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="LastName" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="FirstName" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="MiddleName" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Username" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="Password" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="isactive" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="secret_question" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="secret_answer" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Status" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_RetrieveStocksQuantity" Method="sp_RetrieveStocksQuantity">
+    <Parameter Name="ProductID" Parameter="productID" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="ProductName" Parameter="productName" Type="System.String" DbType="VarChar(30)" />
+    <ElementType Name="sp_RetrieveStocksQuantityResult">
+      <Column Name="productid" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="productname" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="availqty" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="price" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Size" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Damages" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Replacement" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_SalesReport" Method="sp_SalesReport">
+    <Parameter Name="FromDate" Parameter="fromDate" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="ToDate" Parameter="toDate" Type="System.DateTime" DbType="DateTime" />
+    <ElementType Name="sp_SalesReportResult">
+      <Column Name="transactionid" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="productid" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="qty" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="dateOrder" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Subtotal" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="customerType" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_Search_Delivery_Supplier" Method="sp_Search_Delivery_Supplier">
+    <Parameter Name="key" Type="System.String" DbType="VarChar(30)" />
+    <ElementType Name="sp_Search_Delivery_SupplierResult">
+      <Column Name="DeliveryNo" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="OrderID" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="PreparedAndReceivedBy" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="DeliveredBy" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_Search_Orders" Method="sp_Search_Orders">
+    <Parameter Name="key" Type="System.String" DbType="VarChar(30)" />
+    <ElementType Name="sp_Search_OrdersResult">
+      <Column Name="OrderID" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="SupplierID" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="OrderDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="OrderBy" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Status" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_Search_SupplierDetails" Method="sp_Search_SupplierDetails">
+    <Parameter Name="key" Type="System.String" DbType="VarChar(30)" />
+    <ElementType Name="sp_Search_SupplierDetailsResult">
+      <Column Name="AdminID" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="SupplierID" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="SupplierName" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Address" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="ContactNumber1" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ContactNumber2" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ContactPerson" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_Search_User" Method="sp_Search_User">
+    <Parameter Name="key" Type="System.String" DbType="VarChar(30)" />
+    <ElementType Name="sp_Search_UserResult">
+      <Column Name="UserID" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="LastName" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="FirstName" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="MiddleName" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Username" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="Password" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="isactive" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="secret_question" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="secret_answer" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Status" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_Search_ViewCustomerTransaction" Method="sp_Search_ViewCustomerTransaction">
+    <Parameter Name="key" Type="System.String" DbType="VarChar(30)" />
+    <ElementType Name="sp_Search_ViewCustomerTransactionResult">
+      <Column Name="transactionid" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dateOrder" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="time" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="customerid" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="CustomerName" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="address" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="TotalInstallationPayment" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Gtotal" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Cashrendered" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="unitprice" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="change" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="services" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="status" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_searchcustdetails" Method="sp_searchcustdetails">
+    <Parameter Name="key" Type="System.String" DbType="VarChar(30)" />
+    <ElementType Name="sp_searchcustdetailsResult">
+      <Column Name="UserID" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="CustomerID" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="CustomerName" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="Address" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="Contactnumber1" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="Contactnumber2" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_searchcustomerdetails" Method="sp_searchcustomerdetails">
+    <Parameter Name="search" Type="System.String" DbType="VarChar(30)" />
+    <ElementType Name="sp_searchcustomerdetailsResult">
+      <Column Name="UserID" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="CustomerID" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="CustomerName" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="Address" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="Contactnumber1" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="Contactnumber2" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_searchStock" Method="sp_searchStock">
+    <Parameter Name="search" Type="System.String" DbType="VarChar(30)" />
+    <ElementType Name="sp_searchStockResult">
+      <Column Name="productid" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="productname" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="availqty" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="price" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Size" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Damages" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Replacement" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_sel_CustomertransDetails" Method="sp_sel_CustomertransDetails">
+    <Parameter Name="transactionid" Type="System.String" DbType="VarChar(30)" />
+    <ElementType Name="sp_sel_CustomertransDetailsResult">
+      <Column Name="productid" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="qty" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Subtotal" Type="System.Double" DbType="Float" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_SupplierDetails" Method="sp_SupplierDetails">
+    <Parameter Name="AdminID" Parameter="adminID" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="SupplierID" Parameter="supplierID" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="SupplierName" Parameter="supplierName" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="Address" Parameter="address" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="ContactNumber1" Parameter="contactNumber1" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ContactNumber2" Parameter="contactNumber2" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ContactPerson" Parameter="contactPerson" Type="System.String" DbType="VarChar(30)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_update_CustomerDeilveryStatus" Method="sp_update_CustomerDeilveryStatus">
+    <Parameter Name="transactionID" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="Status" Parameter="status" Type="System.String" DbType="VarChar(30)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_update_CustomerTransaction" Method="sp_update_CustomerTransaction">
+    <Parameter Name="TransactionID" Parameter="transactionID" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="TotalInstaPayment" Parameter="totalInstaPayment" Type="System.Double" DbType="Float" />
+    <Parameter Name="Gtotal" Parameter="gtotal" Type="System.Double" DbType="Float" />
+    <Parameter Name="Cashrendered" Parameter="cashrendered" Type="System.Double" DbType="Float" />
+    <Parameter Name="unitprice" Type="System.Double" DbType="Float" />
+    <Parameter Name="change" Type="System.Double" DbType="Float" />
+    <Parameter Name="time" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="date" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="dateOrder" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="services" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="status" Type="System.String" DbType="VarChar(30)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_update_DeliveryCustomer" Method="sp_update_DeliveryCustomer">
+    <Parameter Name="DeliveryID" Parameter="deliveryID" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="date" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="TimetoDeliver" Parameter="timetoDeliver" Type="System.String" DbType="VarChar(30)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_update_stock_price" Method="sp_update_stock_price">
+    <Parameter Name="price" Type="System.Double" DbType="Float" />
+    <Parameter Name="productid" Type="System.String" DbType="VarChar(30)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_Update_StocksQty" Method="sp_Update_StocksQty">
+    <Parameter Name="ProductID" Parameter="productID" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="AvailableQuantity" Parameter="availableQuantity" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_Update_SupplierDetails" Method="sp_Update_SupplierDetails">
+    <Parameter Name="SupplierID" Parameter="supplierID" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="SupplierName" Parameter="supplierName" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="Address" Parameter="address" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="ContactNumber1" Parameter="contactNumber1" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ContactNumber2" Parameter="contactNumber2" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ContactPerson" Parameter="contactPerson" Type="System.String" DbType="VarChar(30)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_update_tblDeliverySupplier" Method="sp_update_tblDeliverySupplier">
+    <Parameter Name="DeliveryNo" Parameter="deliveryNo" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="DeliveredBy" Parameter="deliveredBy" Type="System.String" DbType="VarChar(30)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_update_tblOrderDetails" Method="sp_update_tblOrderDetails">
+    <Parameter Name="OrderID" Parameter="orderID" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="ProdID" Parameter="prodID" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="Status" Parameter="status" Type="System.String" DbType="VarChar(50)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_update_tblOrders" Method="sp_update_tblOrders">
+    <Parameter Name="OrderID" Parameter="orderID" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="Status" Parameter="status" Type="System.String" DbType="VarChar(50)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_Update_User" Method="sp_Update_User">
+    <Parameter Name="UserID" Parameter="userID" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="Username" Parameter="username" Type="System.String" DbType="NVarChar(30)" />
+    <Parameter Name="newpassword" Type="System.String" DbType="NVarChar(MAX)" />
+    <Parameter Name="secret_question" Type="System.String" DbType="NVarChar(MAX)" />
+    <Parameter Name="secret_answer" Type="System.String" DbType="NVarChar(MAX)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_update_userActiveorNot" Method="sp_update_userActiveorNot">
+    <Parameter Name="UserID" Parameter="userID" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="isActive" Type="System.String" DbType="NVarChar(MAX)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_updatecustomerdetails" Method="sp_updatecustomerdetails">
+    <Parameter Name="CustomerID" Parameter="customerID" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="CustomerName" Parameter="customerName" Type="System.String" DbType="NVarChar(30)" />
+    <Parameter Name="Address" Parameter="address" Type="System.String" DbType="NVarChar(30)" />
+    <Parameter Name="Contactnumber1" Parameter="contactnumber1" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="Contactnumber2" Parameter="contactnumber2" Type="System.String" DbType="VarChar(20)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_updateCusTransDetails" Method="sp_updateCusTransDetails">
+    <Parameter Name="transactionID" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="ProductID" Parameter="productID" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="Status" Parameter="status" Type="System.String" DbType="VarChar(30)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_updateStatus" Method="sp_updateStatus">
+    <Parameter Name="transactionid" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="services" Type="System.String" DbType="VarChar(30)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_verify_Status" Method="sp_verify_Status">
+    <Parameter Name="Status" Parameter="status" Type="System.String" DbType="VarChar(30)" />
+    <ElementType Name="sp_verify_StatusResult">
+      <Column Name="UserID" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="LastName" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="FirstName" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="MiddleName" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Username" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="Password" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="isactive" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="secret_question" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="secret_answer" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Status" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_verify_User" Method="sp_verify_User">
+    <Parameter Name="UserID" Parameter="userID" Type="System.String" DbType="VarChar(30)" />
+    <ElementType Name="sp_verify_UserResult">
+      <Column Name="UserID" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="LastName" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="FirstName" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="MiddleName" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Username" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="Password" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="isactive" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="secret_question" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="secret_answer" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Status" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_verify_Username" Method="sp_verify_Username">
+    <Parameter Name="username" Type="System.String" DbType="VarChar(30)" />
+    <ElementType Name="sp_verify_UsernameResult">
+      <Column Name="UserID" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="LastName" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="FirstName" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="MiddleName" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Username" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="Password" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="isactive" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="secret_question" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="secret_answer" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Status" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_verify_usernamepass" Method="sp_verify_usernamepass">
+    <Parameter Name="Username" Parameter="username" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="Password" Parameter="password" Type="System.String" DbType="NVarChar(MAX)" />
+    <ElementType Name="sp_verify_usernamepassResult">
+      <Column Name="UserID" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="LastName" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="FirstName" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="MiddleName" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Username" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="Password" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="isactive" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="secret_question" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="secret_answer" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Status" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_verifyPID" Method="sp_verifyPID">
+    <Parameter Name="ProductID" Parameter="productID" Type="System.String" DbType="VarChar(30)" />
+    <ElementType Name="sp_verifyPIDResult">
+      <Column Name="OrderID" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="ProdID" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="ProductName" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Quantity" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Status" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_verifyusernamepass" Method="sp_verifyusernamepass">
+    <Parameter Name="Username" Parameter="username" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="Password" Parameter="password" Type="System.String" DbType="NVarChar(MAX)" />
+    <ElementType Name="sp_verifyusernamepassResult">
+      <Column Name="UserID" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="LastName" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="FirstName" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="MiddleName" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Username" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="Password" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="isactive" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="secret_question" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="secret_answer" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Status" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_view_CustomerDeliveryDetails" Method="sp_view_CustomerDeliveryDetails">
+    <Parameter Name="DeliveryNo" Parameter="deliveryNo" Type="System.String" DbType="VarChar(30)" />
+    <ElementType Name="sp_view_CustomerDeliveryDetailsResult">
+      <Column Name="DeliveryNo" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="TransactionID" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="ProdID" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="ProductName" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Quantity" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TimeToDeliver" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_view_customerdetails" Method="sp_view_customerdetails">
+    <ElementType Name="sp_view_customerdetailsResult">
+      <Column Name="UserID" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="CustomerID" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="CustomerName" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="Address" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="Contactnumber1" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="Contactnumber2" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_view_customertrandetails" Method="sp_view_customertrandetails">
+    <ElementType Name="sp_view_customertrandetailsResult">
+      <Column Name="transactionid" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="productid" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="productname" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="qty" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="unitprice" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="size" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Status" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="dateOrder" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Subtotal" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="customerType" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_view_DeliveryDetails" Method="sp_view_DeliveryDetails">
+    <Parameter Name="DeliveryNo" Parameter="deliveryNo" Type="System.String" DbType="VarChar(30)" />
+    <ElementType Name="sp_view_DeliveryDetailsResult">
+      <Column Name="ProdID" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="ProductName" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Quantity" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_view_OrderDetails" Method="sp_view_OrderDetails">
+    <Parameter Name="OrderID" Parameter="orderID" Type="System.String" DbType="VarChar(30)" />
+    <ElementType Name="sp_view_OrderDetailsResult">
+      <Column Name="ProdID" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="ProductName" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Quantity" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Status" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_view_remove_prodID" Method="sp_view_remove_prodID">
+    <Parameter Name="ProdID" Parameter="prodID" Type="System.String" DbType="VarChar(30)" />
+    <ElementType Name="sp_view_remove_prodIDResult">
+      <Column Name="ProdID" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="ProductName" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Quantity" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_view_stock" Method="sp_view_stock">
+    <ElementType Name="sp_view_stockResult">
+      <Column Name="productid" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="productname" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="availqty" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="price" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Size" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Damages" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Replacement" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_view_TransactionDetails" Method="sp_view_TransactionDetails">
+    <Parameter Name="transactionID" Type="System.String" DbType="VarChar(30)" />
+    <ElementType Name="sp_view_TransactionDetailsResult">
+      <Column Name="transactionid" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="productid" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="productname" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="qty" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="unitprice" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="size" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Status" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="dateOrder" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Subtotal" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="customerType" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_view_User" Method="sp_view_User">
+    <ElementType Name="sp_view_UserResult">
+      <Column Name="UserID" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="LastName" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="FirstName" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="MiddleName" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Username" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="Password" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="isactive" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="secret_question" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="secret_answer" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Status" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_viewCusdelivery" Method="sp_viewCusdelivery">
+    <ElementType Name="sp_viewCusdeliveryResult">
+      <Column Name="DeliveryID" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="transactionid" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="preparedby" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="TimetoDeliver" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_viewDelivery" Method="sp_viewDelivery">
+    <ElementType Name="sp_viewDeliveryResult">
+      <Column Name="DeliveryNo" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="OrderID" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="PreparedAndReceivedBy" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="DeliveredBy" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_viewInstallion" Method="sp_viewInstallion">
+    <ElementType Name="sp_viewInstallionResult">
+      <Column Name="customerid" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Transactionid" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="productid" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="CustomerName" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="InstallationName" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="InstallationPayment" Type="System.Double" DbType="Float" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_vieworder" Method="sp_vieworder">
+    <ElementType Name="sp_vieworderResult">
+      <Column Name="OrderID" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="SupplierID" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="OrderDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="OrderBy" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Status" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_viewproduct" Method="sp_viewproduct">
+    <ElementType Name="sp_viewproductResult">
+      <Column Name="SupplierID" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="ProductID" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="ProductName" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="AvailQty" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+</Database>
